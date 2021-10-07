@@ -1,13 +1,39 @@
 <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Cejercicio2</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <app-root></app-root>
-</body>
+<html ng-app="ejercicioN2">
+  <head>
+    <!--enlazar con js y angular-->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="javascript.js"></script>
+  </head>
+  <body>
+    <h2>Ejercicio 2: To Do</h2>
+    <div ng-controller="ToDoControlador as lista">
+
+      <!--caja y botón agregar-->
+      <form ng-submit="lista.addTodo()">
+        <input type="text" ng-model="lista.todoText"  size="30"
+               placeholder="Agrega un elemento a la lista">
+        <input class="btn-primary" type="submit" value="Agregar">
+      </form>
+
+      <!--contadores de lista-->
+      <p>
+      <span>
+        <b>{{lista.remaining()}}</b> de
+        <b>{{lista.toDos.length}}</b> tareas pendientes
+      </span>
+      </p>
+
+      <!--lista-->
+      <ul>
+        <li ng-repeat="todo in lista.toDos">
+          <label class="checkbox">
+            <input type="checkbox" id="ch{{todo.id}}" onclick="refreshStyle(this)" ng-model="todo.done">
+            <span id="sp{{todo.id}}"> {{todo.text}}</span>
+          </label>
+        </li>
+      </ul>
+
+    </div>
+  </body>
 </html>
